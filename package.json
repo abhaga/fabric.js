@@ -81,5 +81,8 @@
     "node": ">=8.0.0"
   },
   "main": "./dist/fabric.js",
-  "dependencies": {}
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "grapheme-breaker": "^0.3.2"
+  }
 }
