@@ -15181,7 +15181,7 @@ fabric.util.object.extend(fabric.StaticCanvas.prototype, /** @lends fabric.Stati
       this._render(ctx);
       this._drawClipPath(ctx);
       this.fill = originalFill;
-      this.stroke = originalStroke;
+      this.stroke = originalStroke;     
     },
 
     _drawClipPath: function(ctx) {
@@ -20955,6 +20955,19 @@ fabric.util.object.extend(fabric.Object.prototype, /** @lends fabric.Object.prot
      * @param {CanvasRenderingContext2D} ctx Context to render on
      */
     _render: function(ctx) {
+      if(typeof this.activeSelected != 'undefined'){
+        if(this.activeSelected){
+          console.log('this.activeSelected',this.activeSelected, this.opacity) 
+          this.opacity = 0.33
+        }else{
+          this.opacity = 1
+          console.log('this.activeSelected',this.activeSelected, this.opacity) 
+
+        }
+      }
+      this._renderFill(ctx)
+      
+      
       fabric.util.setImageSmoothing(ctx, this.imageSmoothing);
       if (this.isMoving !== true && this.resizeFilter && this._needsResize()) {
         this.applyResizeFilters();
@@ -25736,7 +25749,7 @@ fabric.Image.filters.BaseFilter.fromObject = function(object, callback) {
     enlargeSpaces: function() {
       var diffSpace, currentLineWidth, numberOfSpaces, accumulatedSpace, line, charBound, spaces;
       for (var i = 0, len = this._textLines.length; i < len; i++) {
-        if (this.textAlign !== 'justify' && (i === len - 1 || this.isEndOfWrapping(i))) {
+        if ((i === len - 1 || this.isEndOfWrapping(i))) {
           continue;
         }
         accumulatedSpace = 0;
